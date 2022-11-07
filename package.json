@@ -1,0 +1,24 @@
+{
+  "name": "18-nosql-social-media-app",
+  "version": "1.0.0",
+  "description": "ther by means of adding and removing friends and adding and removing comments. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "\"social\"",
+    "\"media\"",
+    "\"app\"",
+    "\"NoSQL\""
+  ],
+  "author": "Nathan Underwood",
+  "license": "ISC", 
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
