@@ -10,6 +10,25 @@ const thoughtSchema = new Schema(
             type: Date, 
             default: Date.now, 
             // get: need to figure out
-        }
+        }, 
+        username: {
+            type: String,
+            required: true,
+        }, 
+        userReactions: [reactionSchema],
+    },
+    {
+        toJSON: {
+            getters: true, 
+        }, 
+        id: false,
     }
-)
+);
+
+thoughtSchema.virtuals("totalReactions").get(() => {
+    return this.reactions.length;
+});
+
+const Thought = model("Thought", thoughtSchema);
+
+module.exports = Thought;
