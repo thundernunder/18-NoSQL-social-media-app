@@ -16,10 +16,9 @@ const userController = {
         User.findOne({_id: req.params.userID}).select('-__v')
         .populate('friends')
         .populate('thoughts')
-        .then(userData) => {
+        .then((userData) => {
             if(!userData) {
-                return res.status(404).json({message: 'No user with this ID'
-            });
+                return res.status(404).json({message: 'No user with this ID'});
         }
         res.json(userData);
     })
@@ -29,7 +28,7 @@ const userController = {
       });
     }, 
 
-    createUser(req, res) {
+    addUser(req, res) {
         User.create(req.body)
         .then((userData) => {
             res.json(userData);
@@ -61,17 +60,35 @@ const userController = {
         
         deleteUser(req, res) {
             User.findOneAndDelete({_id:req.params.id})
-            .then((userData)) => {
+            .then((userData) => {
                 if(!userData) {
                     res.status(404).json({message: `Can't find user with this ID`});
+
+                } res.json({message: `User successfully deleted`});
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+              });
+        }, 
+
+        addFriend(req, res) {
+            User.findOneAndUpdate(
+                {_id: req.params.userID}, 
+                {$addToSet: {friends: req.params.friendID}}, 
+                {new: true}
+            )
+            .then((userData) => {
+                if(!userData) {
+                    return res.status(404).json({message: `Can't find user with this ID`});
                 }
-                .then(() => res.json({message: `User successfully deleted`});
+                res.json(userData);
             })
             .catch((err) => {
                 console.log(err);
                 res.status(500).json(err);
             });
-        }, 
+        },
 
         deleteFriend(req, res) {
             User.findOneAndUpdate(
