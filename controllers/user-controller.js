@@ -60,8 +60,36 @@ const userController = {
         }, 
         
         deleteUser(req, res) {
-            User.findOneAndDelete
+            User.findOneAndDelete({_id:req.params.id})
+            .then((userData)) => {
+                if(!userData) {
+                    res.status(404).json({message: `Can't find user with this ID`});
+                }
+                .then(() => res.json({message: `User successfully deleted`});
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+        }, 
 
-
-
+        deleteFriend(req, res) {
+            User.findOneAndUpdate(
+                {_id: req.params.userID}, 
+                {$pull: {friends: req.params.friendID}}, 
+                {new: true}
+            )
+            .then((userData) => {
+                if(!userData) {
+                    return res.status(404).json({message:`Can't find user with this ID`});
+                }
+                res.json(userData);
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+        }
 }
+
+module.exports = userController;
