@@ -19,3 +19,4 @@ router.route("/").get(getThoughts).post(addThought);
 router.route("/:thoughtID").get(getOneThought).put(updateThought);
 
 // need route for adding thought reactions
+module.exports = router;

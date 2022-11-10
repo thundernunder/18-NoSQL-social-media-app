@@ -19,3 +19,5 @@ router.route("/").get(getUsers).post(addUser);
 router.route("/:userID").get(getOneUser).put(updateUser);
 
 // need route for adding user friends
+
+module.exports = router;
