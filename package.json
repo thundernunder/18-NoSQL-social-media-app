@@ -4,7 +4,8 @@
   "description": "ther by means of adding and removing friends and adding and removing comments. ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "start": "node server.js"
   },
   "keywords": [
     "\"social\"",
