@@ -25,7 +25,8 @@ const {
 
 router.route("/").get(getThoughts).post(addThought);
 
-router.route("/:thoughtID").get(getOneThought).put(updateThought);
+router.route("/:thoughtID").get(getOneThought).put(updateThought).delete(deleteThought);
 
 // need route for adding thought reactions
+router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
 module.exports = router;
